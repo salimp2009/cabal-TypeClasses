@@ -1,0 +1,55 @@
+cabal-version:      2.4
+name:               module-names
+version:            0.1.0.0
+synopsis:           sample project to learn module names
+
+-- A longer description of the package.
+-- description:
+homepage:
+
+-- A URL where users can report bugs.
+-- bug-reports:
+license:            BSD-3-Clause
+license-file:       LICENSE
+author:             salimp2009
+maintainer:         salimp2009@gmail.com
+
+-- A copyright notice.
+-- copyright:
+-- category:
+extra-source-files: CHANGELOG.md
+
+library
+    exposed-modules:  MyLib
+                    , Haskellbook.Examples.Introduction.CreatingModules
+                    , Haskellbook.Examples.SortedList 
+                    , Haskellbook.Examples.UserInfo 
+                    , Haskellbook.Examples 
+                    , ModuleDemo
+                    , TypeClasses.Motivation
+                    , TypeClasses.OrderingExample
+                    , TypeClasses.DefaultSignatures
+                    , TypeClasses.TypeApplications
+                    , TypeClasses.NewTypes
+                    , TypeClasses.HigherKindedTypes
+                    , TypeClasses.HigherKindedSelector
+
+    -- Modules included in this library but not exported.
+    -- other-modules:
+
+    -- LANGUAGE extensions used by modules in this package.
+    -- other-extensions:
+    build-depends:    base ^>=4.16.1.0
+    hs-source-dirs:   src
+    default-language: Haskell2010
+    default-extensions: RecordWildCards
+                      , ScopedTypeVariables
+                      , TypeApplications 
+                      , KindSignatures 
+
+test-suite module-names-test
+    default-language: Haskell2010
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          MyLibTest.hs
+    build-depends:    base ^>=4.16.1.0
