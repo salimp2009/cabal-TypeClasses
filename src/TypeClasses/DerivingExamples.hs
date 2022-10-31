@@ -16,6 +16,7 @@
 {-# LANGUAGE DerivingVia #-}
 module TypeClasses.DerivingExamples where
 import TypeClasses.HigherKindedSelector  
+import Data.Kind (Type)
 
 newtype Name = Name String
   deriving (Eq, Show, Ord)
@@ -34,10 +35,20 @@ newtype USD = USD { getMillis :: Integer}
 
 newtype MyMaybe a =  MyMaybe (Maybe a) 
   deriving (Show)
+  deriving (Semigroup, Monoid) via (Sel Maybe a)
 
 -- instance Semigroup (MyMaybe a) where
 --   (MyMaybe a) <> (MyMaybe b) = MyMaybe (pick a b)
 
 -- instance Monoid (MyMaybe a) where
 --   mempty = MyMaybe empty  
+
+newtype Sel (f:: Type -> Type) (a::Type) = Sel (f a) 
+  deriving (Show)
+
+instance (Select f) => Semigroup (Sel f a) where
+  Sel  a <> Sel b = Sel (pick a b)
+
+instance (Select f) => Monoid (Sel f a) where
+  mempty = Sel empty 
 
