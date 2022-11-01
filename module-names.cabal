@@ -34,6 +34,7 @@ library
                     , TypeClasses.HigherKindedTypes
                     , TypeClasses.HigherKindedSelector
                     , TypeClasses.DerivingExamples
+                    , TypeClasses.MyNumericMonoids
 
     -- Modules included in this library but not exported.
     -- other-modules:
