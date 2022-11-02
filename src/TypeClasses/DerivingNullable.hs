@@ -1,9 +1,11 @@
 --{-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE DerivingStrategies #-}
 {-# LANGUAGE DerivingVia #-}
+{-# LANGUAGE StandaloneDeriving #-}
 module TypeClasses.DerivingNullable where
 import Prelude hiding (null)
 import qualified Prelude (null) 
+import Data.Kind (Type)
 
 class Nullable a where
   isNullable :: a -> Bool
@@ -25,3 +27,6 @@ newtype NullMaybe a = NullMaybe {getNull :: Maybe a}
 newtype NullList a = NullList {getNullList :: [a]}  
   deriving (Eq, Show)
   deriving (Nullable) via [a]
+
+newtype Null (f::Type -> Type) (a::Type) = Null (f a) 
+  deriving Show

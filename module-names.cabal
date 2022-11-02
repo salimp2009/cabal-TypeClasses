@@ -37,6 +37,7 @@ library
                     , TypeClasses.MyNumericMonoids
                     , TypeClasses.AnyclassDeriving
                     , TypeClasses.DerivingNullable
+                    , IOActions.IOBasics
 
     -- Modules included in this library but not exported.
     -- other-modules:
