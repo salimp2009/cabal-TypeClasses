@@ -36,6 +36,7 @@ library
                     , TypeClasses.DerivingExamples
                     , TypeClasses.MyNumericMonoids
                     , TypeClasses.AnyclassDeriving
+                    , TypeClasses.DerivingNullable
 
     -- Modules included in this library but not exported.
     -- other-modules:
