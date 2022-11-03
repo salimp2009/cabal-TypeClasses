@@ -1,7 +1,9 @@
 {-# LANGUAGE LambdaCase #-}
+
 module IOActions.IOBasics where
 
 import System.IO
+
 
 copyFile :: FilePath -> FilePath -> IO ()
 copyFile src dst =  -- undefined
@@ -46,3 +48,46 @@ ioRead numString = return (read @Int numString)
 -}
 ioShow :: Show a => a -> IO String
 ioShow = return . show
+
+{-
+>>>return "1" >>= ioRead >>= ioSucc >>= ioSucc >>= ioShow
+"3"
+-}
+ioSucc :: Int  -> IO Int
+ioSucc = return . succ
+
+{-
+>>>:i openFile
+openFile :: FilePath -> IOMode -> IO Handle
+  	-- Defined in ‘GHC.IO.StdHandles’
+
+>>>:i Handle    
+type Handle :: *
+data Handle
+  = FileHandle FilePath {-# UNPACK #-}(MVar Handle__)
+  | DuplexHandle FilePath
+                 {-# UNPACK #-}(MVar Handle__)
+                 {-# UNPACK #-}(MVar Handle__)
+  	-- Defined in ‘GHC.IO.Handle.Types’
+instance Eq Handle -- Defined in ‘GHC.IO.Handle.Types’
+instance Show Handle -- Defined in ‘GHC.IO.Handle.Types’
+
+>>>:t hGetContents    
+hGetContents :: Handle -> IO String
+-}
+
+readWriteFile :: IO ()
+readWriteFile = do
+  handle   <- openFile "/tmp/foo.txt" ReadMode
+  contents <- hGetContents handle
+  putStrLn contents
+
+readWriteFile2 :: IO ()  
+readWriteFile2 =
+  openFile "/tmp/foo.txt" ReadMode >>= hGetContents >>= putStrLn
+
+showWithSeq :: IO ()  
+showWithSeq =
+  putStrLn "this is the first one" 
+  >> putStrLn "this is the second one" 
+  >> putStrLn "this is the last one :)" 
