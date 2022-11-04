@@ -19,7 +19,7 @@ maintainer:         salimp2009@gmail.com
 -- category:
 extra-source-files: CHANGELOG.md
 
-library
+library 
     exposed-modules:  MyLib
                     , Haskellbook.Examples.Introduction.CreatingModules
                     , Haskellbook.Examples.SortedList 
@@ -39,9 +39,10 @@ library
                     , TypeClasses.DerivingNullable
                     , IOActions.IOBasics
                     , IOActions.MappingIO
+                    , IOActions.IOinRealApps
 
     -- Modules included in this library but not exported.
-    -- other-modules:
+    other-modules: 
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
@@ -52,6 +53,32 @@ library
                       , ScopedTypeVariables
                       , TypeApplications 
                       , KindSignatures 
+
+executable io-actions
+    main-is: Main.hs   
+
+    -- Modules included in this executable, other than Main.
+    other-modules: MyLib  
+                 , IOActions.IOBasics
+                 , IOActions.MappingIO
+                 , IOActions.IOinRealApps
+                 , TypeClasses.Motivation
+
+    default-extensions: RecordWildCards
+                      , ScopedTypeVariables
+                      , TypeApplications 
+                      , KindSignatures                 
+
+    -- LANGUAGE extensions used by modules in this package.
+    -- other-extensions:    
+
+    build-depends:
+                      base >=4.7 && <5
+                    
+
+    hs-source-dirs:   app , src
+    ghc-options:      -O2 -threaded -rtsopts -with-rtsopts=-N -Wincomplete-patterns	
+    default-language: Haskell2010                                   
 
 test-suite module-names-test
     default-language: Haskell2010
