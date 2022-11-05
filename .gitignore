@@ -10,5 +10,4 @@ cabal.sandbox.config
 .stack-work
 .ghc.environment.*
 stack.yaml.lock
-
-
+tmp
