@@ -74,6 +74,7 @@ executable io-actions
 
     build-depends:
                       base >=4.7 && <5
+                    , module-names
                     
 
     hs-source-dirs:   app , src
