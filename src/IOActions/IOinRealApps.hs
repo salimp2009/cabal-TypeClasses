@@ -37,7 +37,7 @@ unsafeIO =
 
 makeAndShow :: Int -> IO ()
 makeAndShow num =
-   makeAndReadFile num >>= putStrLn
+   makeAndReadFile num >>= putStrLn 
 
 -- | this is safe because we makeandwrite one file   
 -- then read from file then show
@@ -45,9 +45,22 @@ makeAndShow num =
 -- this version goes one by one
 safeIO :: IO ()   
 safeIO =
-    mapM_ makeAndShow [1..10]  
+    mapM_ makeAndShow [1..10] 
 
 
+-- | this is the naive version of the above
+-- but show the use case of @(>>)@ inside a lambda or 
+-- helper function
+safeIO2 :: IO ()
+safeIO2 =
+   foldl funct (return ()) [1..500]
+    where
+      funct io num = io >> makeAndShow num
+
+-- |
+
+example1 :: Show a => a -> IO (IO String)
+example1 x = pure $ return . show $ x
 
 -- >>>:t mapM  
 -- mapM :: (Traversable t, Monad m) => (a -> m b) -> t a -> m (t b)
